@@ -76,7 +76,14 @@ void vector_erase() {
       ++it;
     }
   }
-  // prefer 更现代化的写法
+// prefer 更现代化的写法
+#if __cplusplus >= 202002L
+  std::erase_if(v, [](auto &val) { return val % 2 == 0; });
+#else
+  v.erase(std::remove_if(v.begin(), v.end(),
+                         [](auto &val) { return val % 2 == 0; }),
+          v.end());
+#endif
 }
 
 vector<int> get_vector() { return vector<int>{0, 1, 3, 4, 5}; }

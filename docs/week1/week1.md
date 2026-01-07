@@ -21,7 +21,7 @@
   v2.insert(it_2_1,1);
   ```
   运行结果：
-  ![img](image/week1/vector_insert_error.png)
+  ![img](image/vector_insert_error.png)
   这个例子，在失效的迭代器的位置插入一个元素，会发生什么，注意到除了core之外，还有一个“doule free or corruption”的报错，以下是解释说明
 
   + 底层发生了什么：
@@ -46,11 +46,11 @@
 
   + 插入：rehash的情况下迭代器会失效，但是通过原迭代器获取的指针还是有效的（因为bucket只是一个指针数组，这个指针指向的Node并未发生变化）
     代码：
-    ![img](image/week1/unordered_map_rehash_error.png)
+    ![img](image/unordered_map_rehash_error.png)
     代码运行结果如下：
-    ![img](image/week1/unordered_map_rehash_result.png)
+    ![img](image/unordered_map_rehash_result.png)
     查看上图的代码，由于是采用for-range的格式写出的代码，因此 it 其实是对Node的引用，在发生rehash之后，迭代器失效了（这就是为什么只循环了一次），但是指针还是有效的。
-    ![img](image/week1/unordered_map_rehash_refernece.png)
+    ![img](image/unordered_map_rehash_refernece.png)
   + 删除：删除节点不会导致迭代器失效，但是需要注意 erase 接口的返回值也是返回下一个迭代器
 + map：
 
